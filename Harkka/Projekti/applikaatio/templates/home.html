@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    Moikka {{ user.username }}!
+    <p><a href="{% url 'book_list' %}">Muistiinpanot</a></p>
+    <p><a href="{% url 'show_data' %}">Luontorastit</a></p>
+    <p><a href="{% url 'dashboard' %}">Kojelauta</a></p>
+    <p><a href="{% url 'logout' %}">Kirjaudu ulos</a></p>
+
+    <body>
+        <div id="container"></div>
+        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        <script>
+    Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+    },
+    title: {
+        text: 'Browser<br>shares<br>2017',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 60
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            dataLabels: {
+                enabled: true,
+                distance: -50,
+                style: {
+                    fontWeight: 'bold',
+                    color: 'white'
+                }
+            },
+            startAngle: -90,
+            endAngle: 90,
+            center: ['50%', '75%'],
+            size: '110%'
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Browser share',
+        innerSize: '50%',
+        data: [
+            ['Viikinsaari', {{ viikinsaari }}],
+            ['Firefox', 13.29],
+            ['Internet Explorer', 13],
+            ['Edge', 3.78],
+            ['Safari', 3.42],
+            {
+                name: 'Other',
+                y: 7.61,
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        ]
+    }]
+});
+
+
+        </script>
+    </body>
+{% else %}
+    <p>Et ole kirjautunut sisään</p>
+    <a href="{% url 'login' %}">Kirjaudu sisään</a>
+{% endif %}
+{% endblock %}

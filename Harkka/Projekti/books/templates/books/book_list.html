@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<h1>Muistiinpanot</h1>
+<p><a href="{% url 'home'  %}">Kotisivulle</a></p>
+<p>Tälle sivulle voit merkitä vapaita muistiinpanoja luontorasteista, joilla olet käynyt.</p>
+<table border="1">
+<thead>
+    <tr>
+    <th>Rastin nimi</th>
+    <th>Muistiinpanot</th>
+    <th>Näytä</th>
+    <th>Muokkaa</th>
+    <th>Poista</th>
+    </tr>
+</thead>
+<tbody>
+    {% for book in object_list %}
+    <tr>
+    <td>{{ book.nimi }}</td>
+    <td>{{ book.tiedot }}</td>
+    <td><a href="{% url "book_view" book.id %}">Näytä</a></td>
+    <td><a href="{% url "book_edit" book.id %}">Muokkaa</a></td>
+    <td><a href="{% url "book_delete" book.id %}">Poista</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url "book_new" %}">Uusi muistiinpano</a>
+<p><a href="{% url 'dashboard' %}">Kojelauta</a></p>

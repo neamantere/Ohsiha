@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<h1>Luontorastit</h1>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">   
+            <tr>
+                <th>Nimi</th>
+                <th>Rastin numero</th>
+                <th>Kuvaus</th>
+                <th>Lisätietoja</th>
+            </tr>
+            {% for field in geodata %}
+            <tr>
+                <td style="padding-left: 2%">{{ field.NIMI }}</td>
+                <td style="padding-left: 3%">{{ field.RASTI }}</td>
+                <td style="padding-left: 5%">{{ field.KOHTEENKUVAUS }}</td>
+                <td>{{ field.LISATIETOJA }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<p><a href="{% url 'home' %}">Kotisivulle</a></p>
+<p><a href="{% url 'dashboard' %}">Kojelauta</a></p>
+
